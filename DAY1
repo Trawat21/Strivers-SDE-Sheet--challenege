@@ -1,0 +1,112 @@
+PASCAL'S TRIANGLE
+
+#include<bits/stdc++.h>
+vector<long long int> generateRow(int row){
+  long long ans =1;
+  vector<long long int> ansRow;
+  ansRow.push_back(1);
+  for(int col = 1; col<row;col++){
+    ans = ans *(row-col);
+    ans = ans/col;
+    ansRow.push_back(ans);
+  }
+  return ansRow;
+}
+
+vector<vector<long long int>> printPascal(int n) 
+{
+  vector<vector<long long int>> res;
+ 
+  for(int i=1;i<=n;i++){
+    
+    res.push_back(generateRow(i));
+  }
+  return res;
+  
+}
+
+
+NEXT PERMUATION
+#include <bits/stdc++.h> 
+vector<int> nextPermutation(vector<int> &permutation, int n)
+{
+    int index = -1;
+    for(int i= n-2;i>=0;i--){
+        if(permutation[i]< permutation[i+1]){
+            index = i;
+            break;
+        }
+    }
+    if(index == -1){
+        reverse(permutation.begin(),permutation.end());
+        return permutation;
+    }
+    for(int i = n-1;i>=0;i--){
+        if(permutation[i] > permutation[index]){
+            swap(permutation[i], permutation[index]);
+            break;
+        }
+    }
+    reverse(permutation.begin() + index + 1, permutation.end());
+    return permutation;
+}
+
+KADANE'S ALGORITHM
+#include <bits/stdc++.h> 
+long long maxSubarraySum(int arr[], int n)
+{ 
+    long long maxi = LONG_MIN; // maximum sum
+    long long sum = 0;
+
+    for (int i = 0; i < n; i++) {
+
+        sum += arr[i];
+
+        if (sum > maxi) {
+            maxi = sum;
+        }
+
+        // If sum < 0: discard the sum calculated
+        if (sum < 0) {
+            sum = 0;
+        }
+    }
+
+    // To consider the sum of the empty subarray
+    // uncomment the following check:
+
+    if (maxi < 0) maxi = 0;
+
+    return maxi;
+
+}
+
+
+SORT 0'S 1'S AND 2'S
+
+#include <bits/stdc++.h> 
+void sort012(int *arr, int n)
+{
+   int low =0;
+   int mid = 0;
+   int high = n-1;
+   while(mid<=high){
+      if(arr[mid] ==0){
+         swap(arr[low],arr[mid]);
+         low++;
+         mid++;
+      }
+      else if(arr[mid] ==1){
+         mid++;
+      }
+      else{
+         swap(arr[mid],arr[high]);
+         high--;
+      }
+   }
+      
+      
+   
+   
+   
+}
